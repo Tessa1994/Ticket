@@ -1,0 +1,13 @@
+html
+  head
+    title Mobile Ticket Viewer
+    style
+      include styles/zendesk.css
+  body
+    div.container
+      h2 Oh noes, something went wrong!
+      p Status Code #{statusCode}
+      h3= error.title
+      p= error.message
+      - if(typeof error === 'string')
+        h3= error

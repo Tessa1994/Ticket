@@ -1,0 +1,12 @@
+html
+  head
+    title Mobile Ticket Viewer
+    style
+      include styles/zendesk.css
+  body
+    div.container
+      h1 Mobile Ticket Viewer
+      h3 Requester: #{user.name}
+      h2= ticket.subject
+      p.description= ticket.description
+      a(href=`/tickets?page=${page}`) Back to all tickets
