@@ -1,9 +1,9 @@
-###Installation and usage instructions
+### Installation and usage instructions
 
-####Requirements 
+#### Requirements 
 * The version of Node.js should be the latest or beyond 6.x.x
 
-####Installation   
+#### Installation   
 
 * Install node package
    
@@ -13,7 +13,7 @@
 
   ```sudo npm install -g mocha```
 
-####Usage instruction
+#### Usage instruction
 * Run web app
 
   ```node index.js```
@@ -23,4 +23,4 @@
   ```mocha --timeout 15000```
 
 
-###Author: Yingxuan Liu
+### Author: Yingxuan Liu
