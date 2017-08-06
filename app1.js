@@ -3,8 +3,11 @@ let express = require('express');
 let app = express();
 let request = require('request-promise');
 let yamljs = require('yamljs');
-let zendesk = require('./api/zendesk');
+let Zendesk = require('./api/zendesk');
 
+let config = yamljs.load('config.yaml');
+
+let zendesk = new Zendesk(config);
 
 app.set('view engine', 'pug');
 
@@ -13,7 +16,7 @@ app.get('/', (req, res) => {
         .then(obj => {
             res.render('index', obj);
         }).catch(err => {
-
+            console.log(err);
         });
 });
 
@@ -22,7 +25,7 @@ app.get('/:id', (req, res) => {
         .then(obj => {
             res.render('show', obj);
         }).catch(err => {
-            console.log(err);
+            res.render('error', {err});
         });
 });
 

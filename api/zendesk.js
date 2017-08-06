@@ -1,25 +1,29 @@
 'use strict'
 let request = require('request-promise');
-let yamljs = require('yamljs');
 let Promise = require('promise');
 
-let config = yamljs.load('config.yaml');
+let Zendesk = module.exports = function(config) {
+    this.baseUrl = `${config.baseUrl}/api/v2/`;
+    this.username = config.username;
+    this.password = config.password;
+};
 
-function generatorAuth(uri, method) {
-    uri = `${config.baseUrl}/api/v2/${uri}`;
+Zendesk.prototype.generatorAuth = function(uri, method){
+    uri = `${this.baseUrl}${uri}`;
     return {
         uri: uri,
         method: method,
         auth: {
-            username: config.username,
-            password: config.password
+            username: this.username,
+            password: this.password,
         }
     }
-}
-module.exports.tickets = (page) => {
+};
+
+Zendesk.prototype.tickets = function(page) {
     return new Promise((resolve, reject) => {
         const pageLimit = 25;
-        request(generatorAuth('tickets.json', 'GET'))
+        request(this.generatorAuth('tickets.json', 'GET'))
             .then((body) => {
                 let tickets = JSON.parse(body).tickets;
                 let count = tickets.length;
@@ -39,13 +43,13 @@ module.exports.tickets = (page) => {
     });
 };
 
-module.exports.ticket = (id, page) => {
+Zendesk.prototype.ticket = function(id, page) {
     return new Promise((resolve, reject) => {
-        request(generatorAuth(`tickets/${id}.json`, 'GET'))
+        request(this.generatorAuth(`tickets/${id}.json`, 'GET'))
             .then((body) => {
                 let ticket = JSON.parse(body).ticket;
                 let userId = ticket.requester_id;
-                return request(generatorAuth(`users/${userId}.json`, 'GET')).then((body) => [ticket, body]);
+                return request(this.generatorAuth(`users/${userId}.json`, 'GET')).then((body) => [ticket, body]);
             })
             .then(([ticket, body]) => {
                 let user = JSON.parse(body).user;

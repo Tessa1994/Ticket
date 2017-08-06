@@ -1,0 +1,16 @@
+html
+    head
+        title zendeskTicketViewer
+    body 
+        h1 Error
+        hr
+        h2 StatusCode: #{err.statusCode}
+        if typeof JSON.parse(err.error).error === 'string'
+            h2 Title: #{JSON.parse(err.error).error}
+            p Message:
+            | #{JSON.parse(err.error).description}
+        else
+            h2 Title: #{JSON.parse(err.error).error.title}
+            p Message:
+            | #{JSON.parse(err.error).error.message}
+        
