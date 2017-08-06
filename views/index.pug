@@ -1,0 +1,32 @@
+html
+    head
+        title zendeskTicketViewer
+        style
+            include styles/w3.css
+    body 
+        h1 Mobile Ticket Viewer
+        hr
+        p #{count} total ticket, #{pageCount} on this page 
+        table 
+            tr 
+                th id
+                th subject
+            each ticket in tickets
+                tr
+                    td
+                        a(href=`/${ticket.id}?page=${page}`)= ticket.id
+                    td
+                        a(href=`/${ticket.id}?page=${page}`)= ticket.subject
+        div.w3-bar 
+            - var n = 1;
+            if page!=1
+                a(href=`/?page=${page-1}`).w3-button <
+            while n <= pages
+                if n == page
+                    a(href=`/?page=${n++}`).w3-button.w3-blue= n-1
+                else
+                    a(href=`/?page=${n++}`).w3-button= n-1
+            if page!=pages    
+                a(href=`/?page=${Number(page)+1}`).w3-button >
+
+                
