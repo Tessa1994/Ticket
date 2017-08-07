@@ -6,7 +6,7 @@ let app = express();
 
 const baseUrl = 'https://cathy1994.zendesk.com/';
 const username = 'xuan199408@gmail.com';
-const password = '';
+const password = 'FYTZVBN00';
 
 const pageLength = 25;
 
@@ -90,4 +90,3 @@ let handleError = (res, err) => {
 
 app.listen(3000, () => console.log('Zendesk app listening on port 3000'));
 
-module.exports = app;

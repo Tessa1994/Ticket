@@ -1,5 +1,5 @@
 var request = require('supertest');
-var app = require('../index');
+var app = require('../app1');
 
 describe("home page", () => {
   it("Home page redirect to tickets", done => {
@@ -10,7 +10,7 @@ describe("home page", () => {
 
 describe("tickets", () => {
   it("Get all tickets", done => {
-    request(app).get("/tickets/")
+    request(app).get("/tickets")
       .expect(200)
       .expect(/total tickets/,done);
   });
@@ -19,4 +19,9 @@ describe("tickets", () => {
       .expect(200)
       .expect(/Requester:/,done);
   }); 
+  it("Get one tickets in page 1", done =>{
+    request(app).get("/tickets/1?page=1")
+     .expect(200)
+     .expect(/Requester:/,done);
+  });    
 })
