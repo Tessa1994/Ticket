@@ -7,7 +7,7 @@ let Zendesk = require('./api/zendesk');
 
 let config = yamljs.load('config.yaml');
 
-let zendesk = new zendesk(config);
+let zendesk = new Zendesk(config);
 
 // set template engine
 app.set('view engine', 'pug');
@@ -17,7 +17,6 @@ app.set('view engine', 'pug');
 app.get('/', (req, res) => {
   res.redirect('/tickets');
 });
-
 
 // get all tickets
 app.get('/tickets', (req, res) => {
