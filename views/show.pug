@@ -1,11 +1,14 @@
 html
     head
         title zendeskTicketViewer
+        style
+            include styles/w3.css
+            include styles/zendesk.css
     body 
+     div.container
         h1 Mobile Ticket Viewer
         hr
         p Requester: #{username}
         h3= ticket.subject
-        p= ticket.description
-        a(href=`/?page=${page}`) back
-        
+        p.description= ticket.description
+        a(href=`/tickets/?page=${page}`) back

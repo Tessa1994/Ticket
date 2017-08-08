@@ -1,16 +1,13 @@
 html
-    head
-        title zendeskTicketViewer
-    body 
-        h1 Error
-        hr
-        h2 StatusCode: #{err.statusCode}
-        if typeof JSON.parse(err.error).error === 'string'
-            h2 Title: #{JSON.parse(err.error).error}
-            p Message:
-            | #{JSON.parse(err.error).description}
-        else
-            h2 Title: #{JSON.parse(err.error).error.title}
-            p Message:
-            | #{JSON.parse(err.error).error.message}
-        
+  head
+    title Mobile Ticket Viewer
+    style
+      include styles/zendesk.css
+  body
+    div.container
+      h2 Oh noes, something went wrong!
+      p Status Code #{statusCode}
+      h3= error.title
+      p= error.message
+      - if(typeof error === 'string')
+        h3= error

@@ -1,7 +1,7 @@
 {
   "name": "zendesk",
   "version": "1.0.0",
-  "description": " ",
+  "description": "zendesk challenge ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,5 +18,9 @@
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
     "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.5.0",
+    "supertest": "^3.0.0"
   }
 }
