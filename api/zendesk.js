@@ -19,14 +19,14 @@ function generatorAuth(uri, method) {
 module.exports.tickets = (page) => {
     return new Promise((resolve, reject) => {
         const pageLimit = 25;
-        request(generatorAuth('tickets.json', 'GET'))
+        request(generatorAuth('incremental/tickets.json?start_time=1', 'GET'))
             .then((body) => {
                 let tickets = JSON.parse(body).tickets;
                 let count = tickets.length;
                 let pages = Math.ceil(count / pageLimit);
-                let end = pages === page ? tickets.length - 1 : page * pageLimit;
-                let pageCount = pages === page ? count % pageLimit : pageLimit;
-                tickets = tickets.slice((page - 1) * pageLimit, end);
+                //let end = pages === page ? tickets.length - 1 : page * pageLimit;
+                let pageCount = pages == page ? count % pageLimit : pageLimit;
+                tickets = tickets.slice((page - 1) * pageLimit, page * pageLimit);
                 resolve({
                     page: page,
                     count: count,
@@ -41,6 +41,7 @@ module.exports.tickets = (page) => {
 
 module.exports.ticket = (id, page) => {
     return new Promise((resolve, reject) => {
+
         request(generatorAuth(`tickets/${id}.json`, 'GET'))
             .then((body) => {
                 let ticket = JSON.parse(body).ticket;
